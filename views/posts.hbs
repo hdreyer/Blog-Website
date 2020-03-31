@@ -1,0 +1,30 @@
+<h1>Welcome! Please create a blog post below:</h1>
+<form id="create" name="create" method="POST" action="/posts">
+    
+  <script type="application/javascript">
+    var deletePost = function (id) {
+    console.log(id);
+    fetch("posts/" + id, { method: "delete" }).then(result => location.href =  '/posts');
+  }
+</script>
+    
+    <div>
+        <label for="postTitle">Post Title: </label>
+        <textarea type="text" name="postTitle" required></textarea>
+    </div>
+    <div>
+        <label for="postBody">Post Body: </label>
+        <textarea type="text" name="postBody" required></textarea>
+    </div>
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</form>
+
+<h1>Here are your previously created blog posts:</h1>
+{{#each posts}}
+<h3>
+  {{ PostTitle }}: {{ PostBody }} <button onClick="deletePost({{PostId}})">Delete</button> <button
+    onclick= "location.href = '/posts/edit'"{{PostId}}>Edit</button>
+</h3>
+{{/each}}
